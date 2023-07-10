@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+
+@font-face {
+    font-family: 'MYPUMA';
+    src: url(../fonts/MYPUMA.TTF);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins,sans-serif;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 100px;
+    background-color: orange;
+    box-shadow: 0 1px 2px ;
+}
+.logo{
+    width: 100px;
+}
+.carrito{
+    width: 30px;
+    cursor: pointer;
+}
+.filtro{
+    display: flex;
+    justify-content: left;
+    padding: 10px;
+}
+#filtro {
+    appearance: none;
+    background-color: orange;
+    border: 1px solid black;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    
+  }
+.contenedor{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto;
+    gap: 3em;
+    padding: 0 5em;
+    padding-bottom: 5em;
+}
+.tarjeta{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px black solid;
+    gap: 1em;
+    box-shadow: 0 2px 2px ;
+}
+.tarjeta img{
+    width: 200px;
+    object-fit: cover;
+}
+.tarjeta h3{
+    font-size: 1rem;
+    border: 1px solid black; 
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: orange;
+}
+.tarjeta p{
+    font-weight: 700;
+    color: crimson;
+    font-size: 2rem;
+}
+.agregar_carrito{
+    background-color: orange;
+    border-radius: 0;
+    border: none;
+    border-top: black 2px solid;
+    padding: 5px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 2px ;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+}
