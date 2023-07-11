@@ -156,6 +156,8 @@ const productos = [
 ];
 
 const carrito = [];
+const modalCarrito = document.querySelector(".carrito-container");
+let contenedorCarrito;
 
 //FUNCION PARA MOSTRAR PRODUCTOS
 function mostrarProductos(productos, sexoSeleccionado) {
@@ -164,7 +166,7 @@ function mostrarProductos(productos, sexoSeleccionado) {
   contenedor.innerHTML = "";
 //RECORRIENDO EL ARRAY DE PRODUCTOS
   productos.forEach(function (producto) {
-//IF PARA EL FILTRO    
+//IF PARA EL FILTRO
     if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
       const contenedorProductos = document.createElement("div");
       contenedorProductos.classList.add("tarjeta");
@@ -188,21 +190,35 @@ function mostrarProductos(productos, sexoSeleccionado) {
     }
   });
 //AGREGAR AL CARRITO
-  const botonAgregar = document.querySelectorAll('.agregar_carrito');
+  const botonAgregar = document.querySelectorAll(".agregar_carrito");
   botonAgregar.forEach(function (boton) {
-    boton.addEventListener('click', function (){
+    boton.addEventListener("click", function () {
       const botonId = parseInt(this.id);
-      const productoAgregado = productos.find(producto => producto.id === botonId);
+      const productoAgregado = productos.find(
+        (producto) => producto.id === botonId
+      );
       carrito.push(productoAgregado);
-      console.log(carrito);
     });
   });
-};
+}
 //EVENTO DE CAMBIO DE FILTRO
-const opcionesFiltro = document.querySelector("#filtro");
-opcionesFiltro.addEventListener("change", function () {
+const opcionesFiltro = document.querySelector('#filtro');
+opcionesFiltro.addEventListener('change', function () {
   const opcionSeleccionada = this.value;
   mostrarProductos(productos, opcionSeleccionada);
 });
+//BOTON CARRITO
+const botonCarrito = document.querySelector('#carrito');
+botonCarrito.addEventListener('click',function(){
+  carrito.forEach(function(itemCarrito){
+    contenedorCarrito=document.createElement('div');
+    contenedorCarrito.classList.add('item-carrito');
+    contenedorCarrito.innerHTML=`
+              <img src='${itemCarrito.imagen}'>
+              <h3>${itemCarrito.nombre}</h3>
+              <p>$${itemCarrito.precio}</p>`;
+              modalCarrito.appendChild(contenedorCarrito);
+  });
+});
 
-mostrarProductos(productos, "todos");
+mostrarProductos(productos, 'todos');
