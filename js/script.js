@@ -242,19 +242,19 @@ botonCarrito.addEventListener("click", function () {
     carrito.forEach(carritoHTML);
     modalCarrito.classList.remove("modal-oculto");
     carritoVisible = true;
-    if(carrito.length===0){
+    if (carrito.length === 0) {
       Toastify({
         text: "El carrito esta vacio!",
         className: "info",
-        duration:3000,
-        position:'center',
+        duration: 3000,
+        position: "center",
       }).showToast();
-    }else{
-    const btnVaciarCarrito = document.createElement("button");
-    btnVaciarCarrito.id = "vaciar-carrito";
-    btnVaciarCarrito.textContent = "Vaciar Carrito";
-    btnVaciarCarrito.addEventListener("click", vaciarCarrito);
-    modalCarrito.appendChild(btnVaciarCarrito);
+    } else {
+      const btnVaciarCarrito = document.createElement("button");
+      btnVaciarCarrito.id = "vaciar-carrito";
+      btnVaciarCarrito.textContent = "Vaciar Carrito";
+      btnVaciarCarrito.addEventListener("click", vaciarCarrito);
+      modalCarrito.appendChild(btnVaciarCarrito);
     }
   }
 });
