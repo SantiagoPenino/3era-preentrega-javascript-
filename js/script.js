@@ -43,7 +43,7 @@ const productos = [
   ),
   new Producto(
     4,
-    "Future Street",
+    "Future St.",
     3200,
     "assets/hombre/pacer-future-street-gris-topo-azul-naranja.jpg",
     "assets/hombre/pacer-future-street-gris-topo-azul-naranja2.jpg",
@@ -91,7 +91,7 @@ const productos = [
   ),
   new Producto(
     10,
-    "Anzarun Lite Slip",
+    "Anzarun Slip",
     3000,
     "assets/mujer/anzarun-lite-slip-on-w-rosa-oro.jpg",
     "assets/mujer/anzarun-lite-slip-on-w-rosa-oro2.jpg",
@@ -99,7 +99,7 @@ const productos = [
   ),
   new Producto(
     11,
-    "Comet 2 Beta",
+    "Comet Beta",
     3300,
     "assets/mujer/comet-2-alt-beta-wns-rosa.jpg",
     "assets/mujer/comet-2-alt-beta-wns-rosa2.jpg",
@@ -139,7 +139,7 @@ const productos = [
   ),
   new Producto(
     16,
-    "Metallic Pop",
+    "Metal Pop",
     3800,
     "assets/mujer/rose-metallic-pop-gris-plata.jpg",
     "assets/mujer/rose-metallic-pop-gris-plata2.jpg",
@@ -175,9 +175,7 @@ function guardarCarrito(carrito) {
 }
 //FUNCION PARA MOSTRAR PRODUCTOS
 function mostrarProductos(productos, sexoSeleccionado) {
-  //LIMPIAR HTML
   contenedor.innerHTML = "";
-  //RECORRIENDO EL ARRAY DE PRODUCTOS
   productos.forEach(function (producto) {
     //IF PARA EL FILTRO
     if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
@@ -227,13 +225,13 @@ function mostrarProductos(productos, sexoSeleccionado) {
     });
   });
 }
-//EVENTO DE CAMBIO DE FILTRO
+//CAMBIO DE FILTRO
 const opcionesFiltro = document.querySelector("#filtro");
 opcionesFiltro.addEventListener("change", function () {
   const opcionSeleccionada = this.value;
   mostrarProductos(productos, opcionSeleccionada);
 });
-//BOTON CARRITO
+//MOSTRAR CARRITO
 botonCarrito.addEventListener("click", function () {
   if (carritoVisible) {
     modalCarrito.innerHTML = "";
