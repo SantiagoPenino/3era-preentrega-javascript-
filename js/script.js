@@ -154,19 +154,21 @@ const productos = [
     "femenino"
   ),
 ];
-
+//VARIABLES
 const carrito = [];
 const modalCarrito = document.querySelector(".carrito-container");
+const botonCarrito = document.querySelector("#carrito");
+const contenedor = document.querySelector("#contenedor");
 let contenedorCarrito;
+let carritoVisible=false;
 
 //FUNCION PARA MOSTRAR PRODUCTOS
 function mostrarProductos(productos, sexoSeleccionado) {
-  const contenedor = document.querySelector("#contenedor");
-//LIMPIAR HTML
+  //LIMPIAR HTML
   contenedor.innerHTML = "";
-//RECORRIENDO EL ARRAY DE PRODUCTOS
+  //RECORRIENDO EL ARRAY DE PRODUCTOS
   productos.forEach(function (producto) {
-//IF PARA EL FILTRO
+    //IF PARA EL FILTRO
     if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
       const contenedorProductos = document.createElement("div");
       contenedorProductos.classList.add("tarjeta");
@@ -179,17 +181,17 @@ function mostrarProductos(productos, sexoSeleccionado) {
 
       const imagen = contenedorProductos.querySelector("img");
       const imagenLateral = imagen.getAttribute("data-imagen-lateral");
-//EVENTO PARA CAMBIAR A IMAGEN LATERAL
+      //EVENTO PARA CAMBIAR A IMAGEN LATERAL
       imagen.addEventListener("mouseover", function () {
         imagen.src = imagenLateral;
       });
-//EVENTO PARA VOLVER A LA IMAGEN PRINCIPAL
+      //EVENTO PARA VOLVER A LA IMAGEN PRINCIPAL
       imagen.addEventListener("mouseout", function () {
         imagen.src = producto.imagen;
       });
     }
   });
-//AGREGAR AL CARRITO
+  //AGREGAR AL CARRITO
   const botonAgregar = document.querySelectorAll(".agregar_carrito");
   botonAgregar.forEach(function (boton) {
     boton.addEventListener("click", function () {
@@ -198,27 +200,46 @@ function mostrarProductos(productos, sexoSeleccionado) {
         (producto) => producto.id === botonId
       );
       carrito.push(productoAgregado);
+
+      Swal.fire({
+        text: "Producto agregado al carrito!",
+        imageUrl: productoAgregado.imagen,
+        imageWidth: 350,
+        imageHeight: 300,
+        imageAlt: "foto de producto",
+        confirmButtonText: "OK",
+      });
     });
   });
 }
 //EVENTO DE CAMBIO DE FILTRO
-const opcionesFiltro = document.querySelector('#filtro');
-opcionesFiltro.addEventListener('change', function () {
+const opcionesFiltro = document.querySelector("#filtro");
+opcionesFiltro.addEventListener("change", function () {
   const opcionSeleccionada = this.value;
   mostrarProductos(productos, opcionSeleccionada);
 });
 //BOTON CARRITO
-const botonCarrito = document.querySelector('#carrito');
-botonCarrito.addEventListener('click',function(){
-  carrito.forEach(function(itemCarrito){
-    contenedorCarrito=document.createElement('div');
-    contenedorCarrito.classList.add('item-carrito');
-    contenedorCarrito.innerHTML=`
+botonCarrito.addEventListener("click", function () {
+  if(carritoVisible){
+    modalCarrito.innerHTML =""; 
+    modalCarrito.classList.add('modal-oculto');
+    carritoVisible=false;  
+  }else{
+    modalCarrito.innerHTML =""; 
+    carrito.forEach(function (itemCarrito) {
+    contenedorCarrito = document.createElement("div");
+    contenedorCarrito.classList.add("item-carrito");
+    contenedorCarrito.innerHTML = `
               <img src='${itemCarrito.imagen}'>
+              <div class="item-texto">
               <h3>${itemCarrito.nombre}</h3>
-              <p>$${itemCarrito.precio}</p>`;
-              modalCarrito.appendChild(contenedorCarrito);
+              <p>$${itemCarrito.precio}</p>
+              </div>`
+    modalCarrito.appendChild(contenedorCarrito);
   });
+    modalCarrito.classList.remove('modal-oculto');
+    carritoVisible=true;
+}
 });
 
-mostrarProductos(productos, 'todos');
+mostrarProductos(productos, "todos");

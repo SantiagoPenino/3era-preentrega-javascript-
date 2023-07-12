@@ -24,12 +24,19 @@ main{
 }
 .carrito-container{
     position: absolute;
-    width: 300px;
     min-height: 100px;
     top: 60px;
     right: 10px;
     border: 1px solid black;
     background-color: white;
+    /* visibility: hidden; */
+}
+.modal-oculto{
+    display: none;
+}
+#cerrar-carrito{
+    border-radius: 50px;
+    padding: 5px;
 }
 .item-carrito{
     display: flex;
@@ -37,7 +44,17 @@ main{
     align-items: center;
     border: 1px solid black;
     padding: 10px;
-
+}
+.item-texto{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.item-texto p{
+    color: crimson;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 .item-carrito img{
     width: 100px;
