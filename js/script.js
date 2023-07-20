@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  cargarProductos();
   carrito = JSON.parse(localStorage.getItem("carrito")) || [];
   carrito.forEach((itemCarrito) => carritoHTML(itemCarrito));
   modalCarrito.classList.add("modal-oculto");
@@ -6,162 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarCarrito();
 });
 
-class Producto {
-  constructor(id, nombre, precio, imagen, imagenLateral, sexo) {
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.imagen = imagen;
-    this.imagenLateral = imagenLateral;
-    this.sexo = sexo;
-  }
-}
-const productos = [
-  new Producto(
-    1,
-    "Anzarun Lite",
-    3000,
-    "assets/hombre/anzarun-lite-slip-on-m-marino-blanco.jpg",
-    "assets/hombre/anzarun-lite-slip-on-m-marino-blanco2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    2,
-    "Future Play",
-    3400,
-    "assets/hombre/futbol-11-future-play-azul-naranja.jpg",
-    "assets/hombre/futbol-11-future-play-azul-naranja2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    3,
-    "Graviton",
-    3500,
-    "assets/hombre/graviton-mns-negro-blanco-lima.jpg",
-    "assets/hombre/graviton-mns-negro-blanco-lima2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    4,
-    "Future St.",
-    3200,
-    "assets/hombre/pacer-future-street-gris-topo-azul-naranja.jpg",
-    "assets/hombre/pacer-future-street-gris-topo-azul-naranja2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    5,
-    "R78 Trek",
-    4000,
-    "assets/hombre/r78-trek-negro-blanco-azul.jpg",
-    "assets/hombre/r78-trek-negro-blanco-azul2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    6,
-    "Rebound Joy",
-    3800,
-    "assets/hombre/rebound-joy-mid-blanco-topo-negro.jpg",
-    "assets/hombre/rebound-joy-mid-blanco-topo-negro2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    7,
-    "Smash 3.0",
-    2900,
-    "assets/hombre/smash-3-0-mns-mostaza-blanco.jpg",
-    "assets/hombre/smash-3-0-mns-mostaza-blanco2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    8,
-    "Street Runner",
-    4500,
-    "assets/hombre/st-runner-v3-negro-blanco.jpg",
-    "assets/hombre/st-runner-v3-negro-blanco2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    9,
-    "X-Ray Square",
-    3300,
-    "assets/hombre/x-ray-2-square-m-negro-azul-amarillo.jpg",
-    "assets/hombre/x-ray-2-square-m-negro-azul-amarillo2.jpg",
-    "masculino"
-  ),
-  new Producto(
-    10,
-    "Anzarun Slip",
-    3000,
-    "assets/mujer/anzarun-lite-slip-on-w-rosa-oro.jpg",
-    "assets/mujer/anzarun-lite-slip-on-w-rosa-oro2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    11,
-    "Comet Beta",
-    3300,
-    "assets/mujer/comet-2-alt-beta-wns-rosa.jpg",
-    "assets/mujer/comet-2-alt-beta-wns-rosa2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    12,
-    "Comet Fit",
-    3400,
-    "assets/mujer/fit-comet-lavanda.jpg",
-    "assets/mujer/fit-comet-lavanda2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    13,
-    "Comet FTR",
-    3400,
-    "assets/mujer/ftr-connect-rosa-oro.jpg",
-    "assets/mujer/ftr-connect-rosa-oro2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    14,
-    "R78 Voyage",
-    4000,
-    "assets/mujer/r78-voyage-wns-negro-orquidea-blanco.jpg",
-    "assets/mujer/r78-voyage-wns-negro-orquidea-blanco2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    15,
-    "Remedie Slip",
-    3600,
-    "assets/mujer/remedie-slip-strap-wns-gris-topo-rosado.jpg",
-    "assets/mujer/remedie-slip-strap-wns-gris-topo-rosado2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    16,
-    "Metal Pop",
-    3800,
-    "assets/mujer/rose-metallic-pop-gris-plata.jpg",
-    "assets/mujer/rose-metallic-pop-gris-plata2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    17,
-    "Rose Plus",
-    3500,
-    "assets/mujer/rose-plus-rosa-lila.jpg",
-    "assets/mujer/rose-plus-rosa-lila2.jpg",
-    "femenino"
-  ),
-  new Producto(
-    18,
-    "Wired Run",
-    3900,
-    "assets/mujer/wired-run-slipon-wns-lila-oro.jpg",
-    "assets/mujer/wired-run-slipon-wns-lila-oro2.jpg",
-    "femenino"
-  ),
-];
 //VARIABLES
 let carrito = [];
 const modalCarrito = document.querySelector(".carrito-container");
@@ -169,6 +14,25 @@ const botonCarrito = document.querySelector("#carrito");
 const contenedor = document.querySelector("#contenedor");
 let contenedorCarrito;
 let carritoVisible = false;
+
+function cargarProductos(){
+  return fetch('/json/productos.json')
+  .then(response => response.json())
+  .then(data =>{
+    const productos = data.productos;
+    mostrarProductos(productos, "todos");
+  })
+  .catch(()=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Ups...',
+      text: 'Algo salió mal!',
+      footer: 'Intentelo nuevamente en unos instantes.'
+    })
+  });
+}
+
+
 
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -215,11 +79,12 @@ function mostrarProductos(productos, sexoSeleccionado) {
 
       Swal.fire({
         text: "Producto agregado al carrito!",
+        timer:2000,
         imageUrl: productoAgregado.imagen,
         imageWidth: 350,
         imageHeight: 300,
         imageAlt: "foto de producto",
-        confirmButtonText: "OK",
+        showConfirmButton: false
       });
       actualizarCarrito();
     });
@@ -268,6 +133,7 @@ function carritoHTML(itemCarrito) {
             <h3>${itemCarrito.nombre}</h3>
             <p>$${itemCarrito.precio}</p>
             </div>
+            <button class='eliminar-item'>X</button>
             `;
   modalCarrito.appendChild(contenedorCarrito);
   const separador = document.createElement("hr");
@@ -293,4 +159,4 @@ function vaciarCarrito() {
   carritoVisible = false;
 }
 
-mostrarProductos(productos, "todos");
+// mostrarProductos(productos, "todos");
