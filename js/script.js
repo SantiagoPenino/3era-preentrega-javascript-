@@ -78,7 +78,7 @@ function mostrarProductos(productos, sexoSeleccionado) {
 
       Swal.fire({
         text: "Producto agregado al carrito!",
-        timer: 2000,
+        timer: 1000,
         imageUrl: productoAgregado.imagen,
         imageWidth: 350,
         imageHeight: 300,
