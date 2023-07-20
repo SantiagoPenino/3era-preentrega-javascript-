@@ -16,21 +16,20 @@ const contenedor = document.querySelector("#contenedor");
 let contenedorCarrito;
 let carritoVisible = false;
 
-function cargarProductos() {
-  return fetch("/json/productos.json")
-    .then((response) => response.json())
-    .then((data) => {
-      productos = data.productos;
-      mostrarProductos(productos, "todos");
-    })
-    .catch(() => {
-      Swal.fire({
-        icon: "error",
-        title: "Ups...",
-        text: "Algo salió mal!",
-        footer: "Intentelo nuevamente en unos instantes.",
-      });
+async function cargarProductos() {
+  try {
+    const response = await fetch("/json/productos.json");
+    const data = await response.json();
+    productos = data.productos;
+    mostrarProductos(productos, "todos");
+  } catch {
+    Swal.fire({
+      icon: "error",
+      title: "Ups...",
+      text: "Algo salió mal!",
+      footer: "Intentelo nuevamente en unos instantes.",
     });
+  }
 }
 
 function guardarCarrito(carrito) {
