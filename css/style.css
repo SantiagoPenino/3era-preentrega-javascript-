@@ -15,10 +15,6 @@
     box-shadow: 0 1px 2px;
 }
 
-main {
-    background-color: lemonchiffon;
-}
-
 .logo {
     width: 100px;
 }
@@ -84,12 +80,20 @@ main {
     text-align: center;
 }
 
+.body {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .contenedor {
     display: grid;
+    width: 80%;
+    justify-items: center;
+    align-items: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 3em;
-    padding: 0 5em;
     padding-bottom: 5em;
 }
 
@@ -101,13 +105,14 @@ main {
     justify-content: space-around;
     border: 1px black solid;
     gap: 1em;
-    box-shadow: 0 2px 2px;
+    box-shadow: 0 10px 10px;
     background-color: white;
 }
 
 .tarjeta img {
-    width: 200px;
+    width: 300px;
     object-fit: cover;
+
 }
 
 .tarjeta h3 {
@@ -153,14 +158,16 @@ main {
     background: #dc143c;
     font-weight: bold;
 }
-.eliminar{
+
+.eliminar {
     border: none;
     background-color: #dc143c;
     cursor: pointer;
     border-radius: 100%;
     padding: 5px;
 }
-.eliminar img{
+
+.eliminar img {
     display: flex;
     justify-content: center;
     padding: 2px;
