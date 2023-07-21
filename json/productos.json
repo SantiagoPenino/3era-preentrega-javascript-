@@ -7,7 +7,7 @@
     "sexo":"masculino"},
 
     {"id":2,
-    "nombre":"Future play 11",
+    "nombre":"Future play",
     "precio":3400,
     "imagen":"/assets/hombre/futbol-11-future-play-azul-naranja.jpg",
     "imagenLateral":"/assets/hombre/futbol-11-future-play-azul-naranja2.jpg",
@@ -63,14 +63,14 @@
     "sexo":"masculino"},
 
     {"id":10,
-    "nombre":"Anzarun lite slip",
+    "nombre":"Anzarun slip",
     "precio":3000,
     "imagen":"/assets/mujer/anzarun-lite-slip-on-w-rosa-oro.jpg",
     "imagenLateral":"/assets/mujer/anzarun-lite-slip-on-w-rosa-oro2.jpg",
     "sexo":"femenino"},
 
     {"id":11,
-    "nombre":"Comet 2 beta",
+    "nombre":"Comet beta",
     "precio":3300,
     "imagen":"/assets/mujer/comet-2-alt-beta-wns-rosa.jpg",
     "imagenLateral":"/assets/mujer/comet-2-alt-beta-wns-rosa2.jpg",

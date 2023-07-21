@@ -5,9 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   modalCarrito.classList.add("modal-oculto");
   carritoVisible = false;
   actualizarCarrito();
+  let filtroDefault = document.querySelector('#filtro');
+  filtroDefault.selectedIndex = 0;
 });
 
-//VARIABLES
+
 let productos = [];
 let carrito = [];
 const modalCarrito = document.querySelector(".carrito-container");
@@ -29,18 +31,16 @@ async function cargarProductos() {
       text: "Algo salió mal!",
       footer: "Intentelo nuevamente en unos instantes.",
     });
-  }
-}
+}}
 
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
-//FUNCION PARA MOSTRAR PRODUCTOS
+
 function mostrarProductos(productos, sexoSeleccionado) {
   contenedor.innerHTML = "";
   productos.forEach(function (producto) {
-    //IF PARA EL FILTRO
-    if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
+     if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
       const contenedorProductos = document.createElement("div");
       contenedorProductos.classList.add("tarjeta");
       contenedorProductos.innerHTML = `
@@ -49,20 +49,17 @@ function mostrarProductos(productos, sexoSeleccionado) {
                 <p>$${producto.precio}</p>
                 <button class='agregar_carrito' id='${producto.id}'>Agregar al carrito</button>`;
       contenedor.appendChild(contenedorProductos);
-
       const imagen = contenedorProductos.querySelector("img");
       const imagenLateral = imagen.getAttribute("data-imagen-lateral");
-      //EVENTO PARA CAMBIAR A IMAGEN LATERAL
       imagen.addEventListener("mouseover", function () {
         imagen.src = imagenLateral;
       });
-      //EVENTO PARA VOLVER A LA IMAGEN PRINCIPAL
       imagen.addEventListener("mouseout", function () {
         imagen.src = producto.imagen;
       });
     }
   });
-  //AGREGAR AL CARRITO
+  
   const botonAgregar = document.querySelectorAll(".agregar_carrito");
   botonAgregar.forEach(function (boton) {
     boton.addEventListener("click", function () {
@@ -88,13 +85,13 @@ function mostrarProductos(productos, sexoSeleccionado) {
     });
   });
 }
-//CAMBIO DE FILTRO
+
 const opcionesFiltro = document.querySelector("#filtro");
 opcionesFiltro.addEventListener("change", function () {
   const opcionSeleccionada = this.value;
   mostrarProductos(productos, opcionSeleccionada);
 });
-//MOSTRAR CARRITO
+
 botonCarrito.addEventListener("click", function () {
   if (carritoVisible) {
     modalCarrito.innerHTML = "";
@@ -113,11 +110,7 @@ botonCarrito.addEventListener("click", function () {
         position: "center",
       }).showToast();
     } else {
-      const btnVaciarCarrito = document.createElement("button");
-      btnVaciarCarrito.id = "vaciar-carrito";
-      btnVaciarCarrito.textContent = "Vaciar Carrito";
-      btnVaciarCarrito.addEventListener("click", vaciarCarrito);
-      modalCarrito.appendChild(btnVaciarCarrito);
+      fncVaciarCarrito();
     }
   }
 });
@@ -129,9 +122,9 @@ function eliminarProducto(id) {
     guardarCarrito(carrito);
     actualizarCarrito();
   }
+  fncVaciarCarrito();
 }
 
-//GENERAR HTML DEL CARRITO
 function carritoHTML(itemCarrito) {
   if (itemCarrito === null) {
     return;
@@ -142,7 +135,7 @@ function carritoHTML(itemCarrito) {
             <img src='${itemCarrito.imagen}'>
             <div class="item-texto">
             <h3>${itemCarrito.nombre}</h3>
-            <p>$${itemCarrito.precio}</p>
+            <p>$${itemCarrito.precio.toFixed(2)}</p>
             </div>`;
   const btnEliminar = document.createElement("button");
   btnEliminar.classList.add("eliminar");
@@ -173,4 +166,12 @@ function vaciarCarrito() {
   actualizarCarrito();
   modalCarrito.classList.add("modal-oculto");
   carritoVisible = false;
+}
+
+function fncVaciarCarrito(){
+  const btnVaciarCarrito = document.createElement("button");
+      btnVaciarCarrito.id = "vaciar-carrito";
+      btnVaciarCarrito.textContent = "Vaciar Carrito";
+      btnVaciarCarrito.addEventListener("click", vaciarCarrito);
+      modalCarrito.appendChild(btnVaciarCarrito);
 }
