@@ -300,4 +300,7 @@
         width: 20px;
         height: 20px;
     }
+    .header {
+        padding: 5px 30px;
+    }
 }

@@ -14,11 +14,10 @@ let contenedorCarrito;
 let carritoVisible = false;
 let sumaTotal = 0;
 let comprar;
-const filtroDefault = document.querySelector('#filtro');
+const filtroDefault = document.querySelector("#filtro");
 const modalCarrito = document.querySelector(".carrito-container");
 const botonCarrito = document.querySelector("#carrito");
 const contenedor = document.querySelector("#contenedor");
-
 
 async function cargarProductos() {
   try {
@@ -33,7 +32,8 @@ async function cargarProductos() {
       text: "Algo salió mal!",
       footer: "Intentelo nuevamente en unos instantes.",
     });
-}}
+  }
+}
 
 function guardarCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -42,7 +42,7 @@ function guardarCarrito(carrito) {
 function mostrarProductos(productos, sexoSeleccionado) {
   contenedor.innerHTML = "";
   productos.forEach(function (producto) {
-     if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
+    if (producto.sexo === sexoSeleccionado || sexoSeleccionado === "todos") {
       const contenedorProductos = document.createElement("div");
       contenedorProductos.classList.add("tarjeta");
       contenedorProductos.innerHTML = `
@@ -61,7 +61,7 @@ function mostrarProductos(productos, sexoSeleccionado) {
       });
     }
   });
-  
+
   const botonAgregar = document.querySelectorAll(".agregar_carrito");
   botonAgregar.forEach(function (boton) {
     boton.addEventListener("click", function () {
@@ -95,7 +95,7 @@ opcionesFiltro.addEventListener("change", function () {
 });
 
 botonCarrito.addEventListener("click", function () {
-    sumaTotal = 0;
+  sumaTotal = 0;
   if (carritoVisible) {
     modalCarrito.innerHTML = "";
     modalCarrito.classList.add("modal-oculto");
@@ -120,7 +120,7 @@ botonCarrito.addEventListener("click", function () {
 });
 
 function eliminarProducto(id) {
-  sumaTotal=0;
+  sumaTotal = 0;
   const index = carrito.findIndex((producto) => producto.id === id);
   if (index !== -1) {
     carrito.splice(index, 1);
@@ -175,38 +175,37 @@ function carritoVacio() {
   sumaTotal = 0;
 }
 
-function VaciarCarrito(){
+function VaciarCarrito() {
   const btnVaciarCarrito = document.createElement("button");
-      btnVaciarCarrito.id = "vaciar-carrito";
-      btnVaciarCarrito.textContent = "Vaciar Carrito";
-      btnVaciarCarrito.addEventListener("click", carritoVacio);
-      modalCarrito.appendChild(btnVaciarCarrito);
+  btnVaciarCarrito.id = "vaciar-carrito";
+  btnVaciarCarrito.textContent = "Vaciar Carrito";
+  btnVaciarCarrito.addEventListener("click", carritoVacio);
+  modalCarrito.appendChild(btnVaciarCarrito);
 }
 
-function total(){
-  carrito.forEach(itemCarrito =>{
+function total() {
+  carrito.forEach((itemCarrito) => {
     sumaTotal += itemCarrito.precio;
-  })
-  comprar = document.createElement('button');
-  comprar.id = 'comprar';
+  });
+  comprar = document.createElement("button");
+  comprar.id = "comprar";
   comprar.textContent = `Comprar: $${sumaTotal.toFixed(2)}`;
   modalCarrito.appendChild(comprar);
-  comprar.addEventListener('click', function(){
+  comprar.addEventListener("click", function () {
     carritoVacio();
-    filtroDefault.style.display="none"
-    contenedor.style.display="flex"
-    contenedor.innerHTML=`<div class="orden-compra">
+    filtroDefault.style.display = "none";
+    contenedor.style.display = "flex";
+    contenedor.innerHTML = `<div class="orden-compra">
                           <h2>Compra realizada con exito</h2>
                           <button id="btn-exito">Nueva compra</button>
-                          </div>`
-    btnAceptar = document.querySelector('.orden-compra');
-    btnAceptar.addEventListener('click',function(){
-      contenedor.style.display="grid"
-      filtroDefault.style.display="block"
+                          </div>`;
+    btnAceptar = document.querySelector(".orden-compra");
+    btnAceptar.addEventListener("click", function () {
+      contenedor.innerHTML = "";
+      contenedor.style.display = "grid";
+      filtroDefault.style.display = "block";
       filtroDefault.selectedIndex = 0;
       cargarProductos();
-    })
+    });
   });
 }
-
-
