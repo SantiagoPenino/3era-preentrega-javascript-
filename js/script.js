@@ -5,18 +5,20 @@ document.addEventListener("DOMContentLoaded", () => {
   modalCarrito.classList.add("modal-oculto");
   carritoVisible = false;
   actualizarCarrito();
-  let filtroDefault = document.querySelector('#filtro');
   filtroDefault.selectedIndex = 0;
 });
 
-
 let productos = [];
 let carrito = [];
+let contenedorCarrito;
+let carritoVisible = false;
+let sumaTotal = 0;
+let comprar;
+const filtroDefault = document.querySelector('#filtro');
 const modalCarrito = document.querySelector(".carrito-container");
 const botonCarrito = document.querySelector("#carrito");
 const contenedor = document.querySelector("#contenedor");
-let contenedorCarrito;
-let carritoVisible = false;
+
 
 async function cargarProductos() {
   try {
@@ -93,6 +95,7 @@ opcionesFiltro.addEventListener("change", function () {
 });
 
 botonCarrito.addEventListener("click", function () {
+    sumaTotal = 0;
   if (carritoVisible) {
     modalCarrito.innerHTML = "";
     modalCarrito.classList.add("modal-oculto");
@@ -110,19 +113,22 @@ botonCarrito.addEventListener("click", function () {
         position: "center",
       }).showToast();
     } else {
-      fncVaciarCarrito();
+      total();
+      VaciarCarrito();
     }
   }
 });
 
 function eliminarProducto(id) {
+  sumaTotal=0;
   const index = carrito.findIndex((producto) => producto.id === id);
   if (index !== -1) {
     carrito.splice(index, 1);
     guardarCarrito(carrito);
     actualizarCarrito();
   }
-  fncVaciarCarrito();
+  total();
+  VaciarCarrito();
 }
 
 function carritoHTML(itemCarrito) {
@@ -160,18 +166,46 @@ function actualizarCarrito() {
   }
 }
 
-function vaciarCarrito() {
+function carritoVacio() {
   carrito = [];
   guardarCarrito(carrito);
   actualizarCarrito();
   modalCarrito.classList.add("modal-oculto");
   carritoVisible = false;
+  sumaTotal = 0;
 }
 
-function fncVaciarCarrito(){
+function VaciarCarrito(){
   const btnVaciarCarrito = document.createElement("button");
       btnVaciarCarrito.id = "vaciar-carrito";
       btnVaciarCarrito.textContent = "Vaciar Carrito";
-      btnVaciarCarrito.addEventListener("click", vaciarCarrito);
+      btnVaciarCarrito.addEventListener("click", carritoVacio);
       modalCarrito.appendChild(btnVaciarCarrito);
 }
+
+function total(){
+  carrito.forEach(itemCarrito =>{
+    sumaTotal += itemCarrito.precio;
+  })
+  comprar = document.createElement('button');
+  comprar.id = 'comprar';
+  comprar.textContent = `Comprar: $${sumaTotal.toFixed(2)}`;
+  modalCarrito.appendChild(comprar);
+  comprar.addEventListener('click', function(){
+    carritoVacio();
+    filtroDefault.style.display="none"
+    contenedor.style.display="flex"
+    contenedor.innerHTML=`<div class="orden-compra">
+                          <h2>Compra realizada con exito</h2>
+                          <button id="btn-exito">Nueva compra</button>
+                          </div>`
+    btnAceptar = document.querySelector('.orden-compra');
+    btnAceptar.addEventListener('click',function(){
+      contenedor.style.display="grid"
+      filtroDefault.style.display="block"
+      cargarProductos();
+    })
+  });
+}
+
+

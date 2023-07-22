@@ -28,7 +28,6 @@
     position: absolute;
     top: 65px;
     right: 10px;
-    /* border: 1px solid black; */
     background-color: white;
     width: 350px;
     box-shadow: 0 5px 5px;
@@ -55,7 +54,7 @@
 }
 
 .item-texto p {
-    color: orangered;
+    back: orangered;
     font-weight: bold;
     font-size: 1.5rem;
 }
@@ -107,8 +106,10 @@
     gap: 1em;
     box-shadow: 0 10px 10px;
     background-color: white;
+    animation-name: animacion-tarjetas;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
 }
-
 .tarjeta img {
     width: 300px;
     object-fit: cover;
@@ -144,14 +145,16 @@
 }
 
 #vaciar-carrito {
-    background-color: #dc143c;
+    background-color: white;
     border: none;
     width: 100%;
     height: 30px;
-    color: white;
+    color: black;
+    text-decoration: underline;
     font-weight: bold;
     font-size: 1rem;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .info {
@@ -174,4 +177,87 @@
     width: 25px;
     height: 25px;
     filter: invert(100%);
+}
+#comprar{
+    text-align: center;
+    border: none;
+    width: 100%;
+    background-color: crimson;
+    color: white;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}
+#comprar:hover{
+    background-color:crimson;
+    color: black;
+}
+.orden-compra{
+    width: 100%;
+    padding-top: 20vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.orden-compra h2{
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-decoration: underline;
+    padding-bottom: 5em;
+}
+.orden-compra button{
+    background-color: crimson;
+    color: white;
+    padding: .5em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5rem;
+    width: 20vw;
+    border: none;
+    box-shadow: 0px 3px 3px black;
+}
+.orden-compra button:hover{
+    transform: scale(1.1);
+}
+
+@keyframes animacion-tarjetas {
+    0%{
+        opacity: 0;
+        scale: 0;
+    }
+    100%{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@media (max-width:1024px){
+    .contenedor {
+        width: 100%;
+        gap: 1em;
+        padding: 1em;
+        padding-bottom: 5em;
+    }
+    .tarjeta img {
+        width: 100%;
+        object-fit: cover;
+    }
+    .tarjeta h3 {
+        font-size: .5rem;
+    }
+    .tarjeta p {
+        font-size: .8rem;
+    }
+   .tarjeta {
+        box-shadow: none;
+    }
+    .agregar_carrito {
+        font-size: .3rem;
+        width: 100%;
+        cursor: pointer;
+    }
 }
