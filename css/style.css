@@ -102,9 +102,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    border: 1px black solid;
     gap: 1em;
-    box-shadow: 0 10px 10px;
+    box-shadow: 0 2px 5px;
     background-color: white;
     animation-name: animacion-tarjetas;
     animation-duration: 1s;
@@ -118,7 +117,6 @@
 
 .tarjeta h3 {
     font-size: 1rem;
-    border: 1px solid black;
     width: 100%;
     text-align: center;
     background-color: black;
@@ -135,15 +133,17 @@
     background-color: orange;
     border-radius: 0;
     border: none;
-    border-top: black 2px solid;
     padding: 5px;
     text-transform: uppercase;
-    box-shadow: 0 2px 2px;
+    text-decoration: underline;
     font-size: 1rem;
     width: 100%;
     cursor: pointer;
 }
-
+.info{
+    background: #dc143c;
+    color: white;
+}
 #vaciar-carrito {
     background-color: white;
     border: none;
@@ -156,12 +156,6 @@
     text-transform: uppercase;
     cursor: pointer;
 }
-
-.info {
-    background: #dc143c;
-    font-weight: bold;
-}
-
 .eliminar {
     border: none;
     background-color: #dc143c;
@@ -218,7 +212,7 @@
     font-size: 1.5rem;
     width: 20vw;
     border: none;
-    box-shadow: 0px 3px 3px black;
+    box-shadow: 0px 3px 5px black;
 }
 .orden-compra button:hover{
     transform: scale(1.1);
@@ -239,25 +233,72 @@
     .contenedor {
         width: 100%;
         gap: 1em;
-        padding: 1em;
-        padding-bottom: 5em;
+        padding: 0 1em;
+        padding-bottom: 1em;
     }
     .tarjeta img {
         width: 100%;
         object-fit: cover;
     }
     .tarjeta h3 {
-        font-size: .5rem;
-    }
-    .tarjeta p {
         font-size: .8rem;
     }
+    .tarjeta p {
+        font-size: 1.5rem;
+    }
    .tarjeta {
-        box-shadow: none;
+        box-shadow: 0 1px 3px black;
+        gap: 0;
     }
     .agregar_carrito {
-        font-size: .3rem;
+        font-size: .5rem;
+        font-weight: bold;
+        text-decoration: none;
         width: 100%;
         cursor: pointer;
+    }
+    .filtro {
+        display: flex;
+        justify-content: center;
+        padding: .5em;
+    }
+    .orden-compra button{
+        padding: .5em;
+        font-size: 1rem;
+        width: 50vw;        
+    }
+    .orden-compra h2{
+        font-size: 1rem;
+        text-transform: uppercase;
+        text-decoration: underline;
+        padding: 3em;
+    }
+    .carrito-container {
+    top: 65px;
+    right: 5px;
+    width: 250px;
+    }
+    .item-texto {
+    font-size: .5rem;
+    }
+    .item-texto p {
+    font-size: .8rem;
+    }
+    .item-carrito{
+        padding: 0 10px;
+    }
+    .item-carrito img {
+    width: 50px;
+    }
+    #comprar{
+    font-size: 1rem;
+    }
+    #vaciar-carrito {
+        font-size: .8rem;
+    }    
+    .eliminar img {
+        padding: 0px;
+        width: 20px;
+        height: 20px;
     }
 }

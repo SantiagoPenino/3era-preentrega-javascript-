@@ -203,6 +203,7 @@ function total(){
     btnAceptar.addEventListener('click',function(){
       contenedor.style.display="grid"
       filtroDefault.style.display="block"
+      filtroDefault.selectedIndex = 0;
       cargarProductos();
     })
   });
