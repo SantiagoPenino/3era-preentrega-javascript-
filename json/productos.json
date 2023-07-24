@@ -2,8 +2,8 @@
     {"id":1,
     "nombre":"Anzarun lite",
     "precio":3000,
-    "imagen":"../assets/hombre/anzarun-lite-slip-on-m-marino-blanco.jpg",
-    "imagenLateral":"../assets/hombre/anzarun-lite-slip-on-m-marino-blanco2.jpg",
+    "imagen":"/assets/hombre/anzarun-lite-slip-on-m-marino-blanco.jpg",
+    "imagenLateral":"/assets/hombre/anzarun-lite-slip-on-m-marino-blanco2.jpg",
     "sexo":"masculino"},
 
     {"id":2,

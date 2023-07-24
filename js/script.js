@@ -21,7 +21,7 @@ const contenedor = document.querySelector("#contenedor");
 
 async function cargarProductos() {
   try {
-    const response = await fetch("/json/productos.json");
+    const response = await fetch("../json/productos.json");
     const data = await response.json();
     productos = data.productos;
     mostrarProductos(productos, "todos");
