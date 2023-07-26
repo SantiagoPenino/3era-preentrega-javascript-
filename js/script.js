@@ -70,9 +70,17 @@ function mostrarProductos(productos, sexoSeleccionado) {
       const botonId = parseInt(this.id);
       const productoAgregado = productos.find(
         (producto) => producto.id === botonId
-      );
-      carrito.push(productoAgregado);
-      guardarCarrito(carrito);
+        );
+
+        const productoEnCarrito = carrito.find(
+          (itemCarrito) => itemCarrito.id === botonId
+        );
+          if(productoEnCarrito){
+            productoEnCarrito.cantidad +=1;
+          }else{
+            carrito.push(productoAgregado);
+          }
+          guardarCarrito(carrito);
 
       Swal.fire({
         text: "Producto agregado al carrito!",
@@ -123,7 +131,12 @@ function eliminarProducto(id) {
   sumaTotal = 0;
   const index = carrito.findIndex((producto) => producto.id === id);
   if (index !== -1) {
-    carrito.splice(index, 1);
+    const producto = carrito[index]
+    if(producto.cantidad>1){
+      producto.cantidad--
+    }else{
+      carrito.splice(index, 1);
+    }
     guardarCarrito(carrito);
     actualizarCarrito();
   }
@@ -139,6 +152,7 @@ function carritoHTML(itemCarrito) {
   contenedorCarrito.classList.add("item-carrito");
   contenedorCarrito.innerHTML = `
             <img src='${itemCarrito.imagen}'>
+            <p>X ${itemCarrito.cantidad}</p>
             <div class="item-texto">
             <h3>${itemCarrito.nombre}</h3>
             <p>$${itemCarrito.precio.toFixed(2)}</p>
@@ -167,6 +181,9 @@ function actualizarCarrito() {
 }
 
 function carritoVacio() {
+  carrito.forEach(function (producto){
+    producto.cantidad = 1;
+  })
   carrito = [];
   guardarCarrito(carrito);
   actualizarCarrito();

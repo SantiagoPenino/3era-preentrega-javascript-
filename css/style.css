@@ -43,6 +43,11 @@
     align-items: center;
     padding: 10px;
 }
+.item-carrito p{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color:crimson ;
+}
 
 .item-texto {
     text-transform: uppercase;
@@ -56,6 +61,7 @@
 .item-texto p {
     font-weight: bold;
     font-size: 1.5rem;
+    color: black;
 }
 
 .item-carrito img {
