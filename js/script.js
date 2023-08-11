@@ -155,7 +155,7 @@ function carritoHTML(itemCarrito) {
             <p>X ${itemCarrito.cantidad}</p>
             <div class="item-texto">
             <h3>${itemCarrito.nombre}</h3>
-            <p>$${itemCarrito.precio.toFixed(2)}</p>
+            <p>$${itemCarrito.precio.toFixed(2)*itemCarrito.cantidad}</p>
             </div>`;
   const btnEliminar = document.createElement("button");
   btnEliminar.classList.add("eliminar");
@@ -202,7 +202,7 @@ function VaciarCarrito() {
 
 function total() {
   carrito.forEach((itemCarrito) => {
-    sumaTotal += itemCarrito.precio;
+    sumaTotal += itemCarrito.precio*itemCarrito.cantidad;
   });
   comprar = document.createElement("button");
   comprar.id = "comprar";
